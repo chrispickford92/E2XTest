@@ -1,0 +1,9 @@
+{
+    "baseUrl": "https://cornerstone-light-demo.mybigcommerce.com/",
+    "ignoreTestFiles": "*.js",
+    "projectId": "wt5z48",
+  
+  
+    "viewportWidth": 1200,
+    "viewportHeight": 800
+  }

@@ -1,0 +1,38 @@
+{
+  "name": "cypress-hill",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@perryrh0dan/2fa": "^1.0.2",
+    "chokidar": "^2.1.8",
+    "core-js": "^3.6.5",
+    "cypress-downloadfile": "^1.2.0",
+    "eslint": "^5.13.0",
+    "modules": "^0.4.0",
+    "node": "^14.4.0",
+    "npm": "^6.14.4",
+    "prettier": "^1.16.4"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
+  "devDependencies": {
+    "axios": "^0.19.2",
+    "cypress": "^9.7.0",
+    "cypress-cucumber-preprocessor": "^2.5.5",
+    "cypress-file-upload": "^3.5.3",
+    "hotp-totp-generator": "^1.1.3",
+    "jsotp": "^1.0.4",
+    "jssha": "^3.2.0",
+    "otplib": "^12.0.1",
+    "simpleotp": "^1.0.0",
+    "speakeasy": "^2.0.0",
+    "totp-generator": "0.0.13"
+  }
+}
