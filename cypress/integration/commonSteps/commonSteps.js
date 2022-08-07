@@ -13,6 +13,8 @@ import {
 
 //Adds Shipping details for a specific user
 const shippingDetails = () => {
+  cy.url().should('include', 'https://cornerstone-light-demo.mybigcommerce.com/checkout')
+  
   cy.get(byId('countryCodeInput')).select('KY')
   cy.get(byId('firstNameInput')).type('Frank')
   cy.get(byId('lastNameInput')).type('Lampard')
@@ -29,8 +31,7 @@ cy.intercept({
 cy.wait('@dataPUTFirst').its('response.statusCode').should('equal', 200)
   cy.get(byId('checkout-shipping-continue')).click()
 
-
-
+cy.get(byClass('cart-priceItem optimizedCheckout-contentPrimary')).should('contain', '$10.00')
 }
 //Add's card details for specific user
 const cardDetails = () => {
@@ -60,14 +61,15 @@ const addFive = () => {
   cy.visit('https://cornerstone-light-demo.mybigcommerce.com/')
   cy.get(byId('menu')).contains('Kitchen').click()
   cy.get(bydataTest('card-87')).contains('Add to Cart').click()
-  // cy.get(byId('menu')).contains('Utility').click()
-  // cy.get(bydataTest('card-100')).contains('Add to Cart').click()
-  // cy.get(byId('menu')).contains('Kitchen').click()
-  // cy.get(bydataTest('card-94')).contains('Add to Cart').click()
-  // cy.get(byId('menu')).contains('Publications').click()
-  // cy.get(bydataTest('card-111')).contains('Add to Cart').click()
-  // cy.get(byId('menu')).contains('Utility').click()
-  // cy.get(bydataTest('card-83')).contains('Add to Cart').click()
+  cy.get(byId('menu')).contains('Utility').click()
+  cy.get(bydataTest('card-100')).contains('Add to Cart').click()
+  cy.get(byId('menu')).contains('Kitchen').click()
+  cy.get(bydataTest('card-94')).contains('Add to Cart').click()
+  cy.get(byId('menu')).contains('Publications').click()
+  cy.get(bydataTest('card-111')).contains('Add to Cart').click()
+  cy.get(byId('menu')).contains('Utility').click()
+  cy.get(bydataTest('card-83')).contains('Add to Cart').click()
+  
   cy.visit('https://cornerstone-light-demo.mybigcommerce.com/')
 
 
@@ -87,11 +89,24 @@ const randomEmail = () => {
 
 }
 
+const awaitConfirmation = () => {
+  /*Await store front confirmation page that the order has been completed successfully*/
+  cy.intercept({
+    method: 'POST', 
+    url: 'https://cornerstone-light-demo.mybigcommerce.com/internalapi/v1/checkout/order',
+  }).as('awaitConfirmation');
+  // Wait for response.status to be 200
+  cy.wait('@awaitConfirmation').its('response.statusCode').should('equal', 201)
+
+
+}
+
 
 export default {
   addThree,
   addFive,
   randomEmail,
   cardDetails,
-  shippingDetails
+  shippingDetails,
+  awaitConfirmation
 }
