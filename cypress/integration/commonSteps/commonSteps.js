@@ -20,7 +20,16 @@ const shippingDetails = () => {
   cy.get(byId('cityInput')).type('Eastbourne')
   cy.get(byId('phoneInput')).type('01323568568')
   cy.get(byId('postCodeInput')).type('bn23 6jr')
+  // Give an alias to request
+cy.intercept({
+  method: 'PUT', 
+  url: 'https://cornerstone-light-demo.mybigcommerce.com/api/storefront/checkouts/**',
+}).as('dataPUTFirst');
+// Wait for response.status to be 200
+cy.wait('@dataPUTFirst').its('response.statusCode').should('equal', 200)
   cy.get(byId('checkout-shipping-continue')).click()
+
+
 
 }
 //Add's card details for specific user
@@ -39,11 +48,12 @@ const addThree = () => {
   cy.get(bydataTest('card-87')).contains('Add to Cart').click()
   cy.get(byId('menu')).contains('Utility').click()
   cy.get(bydataTest('card-100')).contains('Add to Cart').click()
-  cy.get(byId('menu')).contains('Kitchen').click()
-  cy.get(bydataTest('card-94')).contains('Add to Cart').click()
+  cy.request('https://cornerstone-light-demo.mybigcommerce.com/cart.php?action=add&product_id=105') //add directly via API call
   cy.visit('https://cornerstone-light-demo.mybigcommerce.com/')
 
 }
+
+
 
 //Add five items from different pages as user
 const addFive = () => {
