@@ -3,7 +3,7 @@
 
 Test completed using Cypress Version 9.7.0. 
 
-To open test running, locate the folder in command line (or similar) and use the following: 
+To open test runner, locate the folder in command line (cd /c/E2XTest) and use the following: 
 
 ./node_modules/.bin/cypress open
 
