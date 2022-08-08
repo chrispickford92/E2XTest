@@ -147,6 +147,7 @@ And(/^Creates a new account$/, () => {
 
 When(/^the User enters valid shipping and credit card information$/, () => {
   commonStep.shippingDetails()
+  cy.get(byClass('cart-priceItem optimizedCheckout-contentPrimary')).should('contain', '$50.00')
   commonStep.cardDetails()
 
 });

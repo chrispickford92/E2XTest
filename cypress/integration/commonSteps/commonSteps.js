@@ -31,7 +31,7 @@ cy.intercept({
 cy.wait('@dataPUTFirst').its('response.statusCode').should('equal', 200)
   cy.get(byId('checkout-shipping-continue')).click()
 
-cy.get(byClass('cart-priceItem optimizedCheckout-contentPrimary')).should('contain', '$10.00')
+
 }
 //Add's card details for specific user
 const cardDetails = () => {
